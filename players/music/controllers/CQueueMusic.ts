@@ -270,22 +270,23 @@ export class MyQueue extends Queue {
             if (index > paginator.maxLength) {
                 paginator.currentPage = 0;
             }
-
-            const currentPage = paginator.currentPage;
-
-            const queue = this.tracks
-                .slice(currentPage * 10, currentPage * 10 + 10)
-                .map(
-                    (track, index1) =>
-                        `${currentPage * 10 + index1 + 1}. ${track.title}` +
-                        `${track.isYoutubeTrack() && track.info.duration
-                            ? ` (${track.info.duration})`
-                            : ""
-                        }`
-                )
-                .join("\n\n");
-
-            return `${current}\n\`\`\`markdown\n${queue}\`\`\``;
+        
+        const currentPage = paginator.currentPage;
+    
+        const queue = this.tracks
+            .slice(currentPage * 10, currentPage * 10 + 10)
+            .map(
+            (track, index1) =>
+                `${currentPage * 10 + index1 + 1}. ${track.title}` +
+                `${
+                track.isYoutubeTrack() && track.info.duration
+                    ? ` (${track.info.duration})`
+                    : ""
+                }`
+            )
+            .join("\n\n");
+    
+        return { content: `${current}\n\`\`\`markdown\n${queue}\`\`\`` };
         }, Math.round(this.size / 10));
 
         await new Pagination(interaction, pageOptions, {

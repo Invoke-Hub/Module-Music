@@ -265,7 +265,7 @@ export class music {
 
   @Slash({ description: "Play a song" })
   async play(
-    @SlashOption({ description: "song name", name: "song" })
+    @SlashOption({ description: "song name", name: "song", type: ApplicationCommandOptionType.String })
     songName: string,
     interaction: CommandInteraction,
     client: Client
@@ -288,7 +288,7 @@ export class music {
 
   @Slash({ description: "Play a playlist" })
   async playlist(
-    @SlashOption({ description: "playlist name", name: "playlist" })
+    @SlashOption({ description: "playlist name", name: "playlist", type: ApplicationCommandOptionType.String })
     playlistName: string,
     interaction: CommandInteraction,
     client: Client
@@ -432,7 +432,8 @@ export class music {
   seek(
     @SlashOption({
       description: "seek time in seconds",
-      name: "time",
+      name: "time", 
+      type: ApplicationCommandOptionType.String
     })
     time: number,
     interaction: CommandInteraction,
